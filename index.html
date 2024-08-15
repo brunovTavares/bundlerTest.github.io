@@ -1,16 +1,63 @@
-<html><head><meta name="color-scheme" content="light dark"><meta charset="utf-8"></head><body><pre>{
-    "applications": [
-        {
-            "applicationId": "com.wallee.android.pinpad",
-            "configuration": {
-                "on-home-screen": false,
-                "custom": []
-            },
-            "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
-            "version": "120010"
-        }
-    ],
-    "configuration": {},
-    "last-changed": "2024-08-15T15:24:00+00:00",
-    "reportUrl": "https://android-bundler.wallee.com/report.php"
-}</pre><div class="json-formatter-container"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>JSON Formatter Example</title>
+    <!-- Load the JSON Formatter library from a CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.umd.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.min.css" />
+</head>
+<body>
+    <h1>Formatted JSON Data</h1>
+
+    <!-- This <pre> tag shows the raw JSON data -->
+    <pre>{
+        "applications": [
+            {
+                "applicationId": "com.wallee.android.pinpad",
+                "configuration": {
+                    "on-home-screen": false,
+                    "custom": []
+                },
+                "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
+                "version": "120010"
+            }
+        ],
+        "configuration": {},
+        "last-changed": "2024-08-15T15:24:00+00:00",
+        "reportUrl": "https://android-bundler.wallee.com/report.php"
+    }</pre>
+
+    <!-- This is the container where the formatted JSON will be displayed -->
+    <div class="json-formatter-container"></div>
+
+    <script>
+        // The JSON data to be formatted
+        const jsonData = {
+            "applications": [
+                {
+                    "applicationId": "com.wallee.android.pinpad",
+                    "configuration": {
+                        "on-home-screen": false,
+                        "custom": []
+                    },
+                    "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
+                    "version": "120010"
+                }
+            ],
+            "configuration": {},
+            "last-changed": "2024-08-15T15:24:00+00:00",
+            "reportUrl": "https://android-bundler.wallee.com/report.php"
+        };
+
+        // Locate the container for the formatted JSON
+        const container = document.querySelector('.json-formatter-container');
+
+        // Create a JSONFormatter instance and render the JSON data
+        const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
+        container.appendChild(formatter.render());
+    </script>
+</body>
+</html>
