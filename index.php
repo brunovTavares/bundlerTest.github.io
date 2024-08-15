@@ -1,6 +1,4 @@
-<html>
-    <head><meta name="color-scheme" content="light dark"><meta charset="utf-8"></head>
-    <body><pre>{
+{
     "applications": [
         {
             "applicationId": "com.wallee.android.pinpad",
@@ -9,11 +7,10 @@
                 "custom": []
             },
             "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
-            "version": "120010"
+            "version": "120009"
         }
     ],
     "configuration": {},
-    "last-changed": "2024-08-15T10:50:40+00:00",
+    "last-changed": "2024-08-15T15:04:24+00:00",
     "reportUrl": "https://android-bundler.wallee.com/report.php"
-}</pre><div class="json-formatter-container"></div></body>
-</html>
+}
