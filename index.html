@@ -10,51 +10,43 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.min.css" />
 </head>
 <body>
-    <pre>{
-        "applications": [
-            {
-                "applicationId": "com.wallee.android.pinpad",
-                "configuration": {
-                    "on-home-screen": false,
-                    "custom": []
-                },
-                "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
-                "version": "120010"
-            }
-        ],
-        "configuration": {},
-        "last-changed": "2024-08-15T15:24:00+00:00",
-        "reportUrl": "https://android-bundler.wallee.com/report.php"
-    }</pre>
-
-    <!-- This is the container where the formatted JSON will be displayed -->
     <div class="json-formatter-container"></div>
 
     <script>
-        // The JSON data to be formatted
-        const jsonData = {
-            "applications": [
-                {
-                    "applicationId": "com.wallee.android.pinpad",
-                    "configuration": {
-                        "on-home-screen": false,
-                        "custom": []
-                    },
-                    "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
-                    "version": "120010"
-                }
-            ],
-            "configuration": {},
-            "last-changed": "2024-08-15T15:24:00+00:00",
-            "reportUrl": "https://android-bundler.wallee.com/report.php"
-        };
+        // Function to get the platform from the URL query string
+        function getPlatformFromUrl() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('platform');
+        }
 
-        // Locate the container for the formatted JSON
-        const container = document.querySelector('.json-formatter-container');
+        // Function to fetch JSON data from the same URL
+        async function fetchJsonData() {
+            const platform = getPlatformFromUrl();
+            if (!platform) return null;
 
-        // Create a JSONFormatter instance and render the JSON data
-        const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
-        container.appendChild(formatter.render());
+            const url = `https://brunovtavares.github.io/bundlerTest.github.io&platform=${platform}`;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                return await response.json();
+            } catch (error) {
+                console.error('Failed to fetch JSON data:', error);
+                return null;
+            }
+        }
+
+        // Function to render JSON data using JSON Formatter
+        async function renderJson() {
+            const jsonData = await fetchJsonData();
+            if (!jsonData) return;
+
+            const container = document.querySelector('.json-formatter-container');
+            const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
+            container.appendChild(formatter.render());
+        }
+
+        // Call the renderJson function when the page loads
+        renderJson();
     </script>
 </body>
 </html>
