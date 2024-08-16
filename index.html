@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>JSON Formatter Example</title>
+    <title>JSON Display</title>
     <!-- Load the JSON Formatter library from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.umd.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.min.css" />
@@ -14,8 +14,8 @@
     <div class="json-formatter-container"></div>
 
     <script>
-        // The default JSON data to be displayed if no platform is provided
-        const defaultJsonData = {
+        // The JSON data to be displayed
+        const jsonData = {
             "applications": [
                 {
                     "applicationId": "com.wallee.android.pinpad",
@@ -28,48 +28,14 @@
                 }
             ],
             "configuration": {},
-            "last-changed": "2024-08-15T15:24:00+00:00",
+            "last-changed": "2024-08-15T14:36:56+00:00",
             "reportUrl": "https://android-bundler.wallee.com/report.php"
         };
 
-        // Function to get the platform from the URL query string
-        function getPlatformFromUrl() {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get('platform');
-        }
-
-        // Function to fetch JSON data from the same URL
-        async function fetchJsonData() {
-            const platform = getPlatformFromUrl();
-            if (!platform) return null;
-
-            const url = `https://brunovtavares.github.io/bundlerTest.github.io&platform=${platform}`;
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error('Network response was not ok');
-                return await response.json();
-            } catch (error) {
-                console.error('Failed to fetch JSON data:', error);
-                return null;
-            }
-        }
-
-        // Function to render JSON data using JSON Formatter
-        async function renderJson() {
-            let jsonData = defaultJsonData; // Use default JSON data by default
-
-            const platformJsonData = await fetchJsonData();
-            if (platformJsonData) {
-                jsonData = platformJsonData; // Replace with fetched JSON if available
-            }
-
-            const container = document.querySelector('.json-formatter-container');
-            const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
-            container.appendChild(formatter.render());
-        }
-
-        // Call the renderJson function when the page loads
-        renderJson();
+        // Render the JSON data using JSON Formatter
+        const container = document.querySelector('.json-formatter-container');
+        const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
+        container.appendChild(formatter.render());
     </script>
 </body>
 </html>
