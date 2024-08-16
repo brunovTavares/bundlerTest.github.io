@@ -10,9 +10,28 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.6/dist/json-formatter.min.css" />
 </head>
 <body>
+    <!-- Container for the formatted JSON -->
     <div class="json-formatter-container"></div>
 
     <script>
+        // The default JSON data to be displayed if no platform is provided
+        const defaultJsonData = {
+            "applications": [
+                {
+                    "applicationId": "com.wallee.android.pinpad",
+                    "configuration": {
+                        "on-home-screen": false,
+                        "custom": []
+                    },
+                    "downloadUrl": "https://android-bundler.wallee.com/upload/apps/com.wallee.android.pinpad/120009/paydroid.apk",
+                    "version": "120010"
+                }
+            ],
+            "configuration": {},
+            "last-changed": "2024-08-15T15:24:00+00:00",
+            "reportUrl": "https://android-bundler.wallee.com/report.php"
+        };
+
         // Function to get the platform from the URL query string
         function getPlatformFromUrl() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -37,8 +56,12 @@
 
         // Function to render JSON data using JSON Formatter
         async function renderJson() {
-            const jsonData = await fetchJsonData();
-            if (!jsonData) return;
+            let jsonData = defaultJsonData; // Use default JSON data by default
+
+            const platformJsonData = await fetchJsonData();
+            if (platformJsonData) {
+                jsonData = platformJsonData; // Replace with fetched JSON if available
+            }
 
             const container = document.querySelector('.json-formatter-container');
             const formatter = new JSONFormatter(jsonData, { theme: 'dark', animateOpen: true, animateClose: true });
